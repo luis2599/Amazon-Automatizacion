@@ -29,7 +29,7 @@ dependencies {
 test {
     //useTestNG()
     useJUnit()
-    include '**/TestRunner.class'
+    //include '**/TestRunner.class'
 }
 
 tasks.named('test') {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="8.912" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-10T23:20:10.028263800Z">
+<testcase classname="Busqueda y validacion de resultados" name="Busqueda de un producto" time="8.747">
+<system-out><![CDATA[
+Given Abre el navegador e ingresa al sitio web..............................passed
+When Ingresar el producto a buscar..........................................passed
+]]></system-out>
+</testcase>
+</testsuite>
