@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.automation'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Selenium
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.16.1'
+
+    // WebDriver Manager
+    testImplementation 'io.github.bonigarcia:webdrivermanager:6.3.3'
+
+    // TestNG
+    testImplementation 'org.testng:testng:7.8.0'
+
+    // Cucumber
+    testImplementation 'io.cucumber:cucumber-java:7.33.0'
+    testImplementation 'io.cucumber:cucumber-testng:7.33.0'
+    testImplementation 'io.cucumber:cucumber-junit:7.14.1'
+
+}
+
+test {
+    //useTestNG()
+    useJUnit()
+    include '**/TestRunner.class'
+}
+
+tasks.named('test') {
+    systemProperty "cucumber.options", System.getProperty ("cucumber.options")
+    systemProperties System.getProperties()
+}
