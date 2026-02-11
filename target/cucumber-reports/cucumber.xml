@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="8.912" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-10T23:20:10.028263800Z">
-<testcase classname="Busqueda y validacion de resultados" name="Busqueda de un producto" time="8.747">
+<testsuite name="Cucumber" time="10.449" tests="1" skipped="0" failures="1" errors="0" timestamp="2026-02-11T22:06:51.899608200Z">
+<testcase classname="Busqueda y validacion de resultados" name="Busqueda de un producto" time="10.236">
+<failure/>
 <system-out><![CDATA[
 Given Abre el navegador e ingresa al sitio web..............................passed
-When Ingresar el producto a buscar..........................................passed
+And Selecciona el pais de residencia "Alemania".............................passed
+When Ingresar el producto a buscar "laptop".................................passed
+Then Validar que el producto se encuentra en los resultados de busqueda.....undefined
 ]]></system-out>
 </testcase>
 </testsuite>

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 //importación de las clases necesarias para el manejo de Selenium WebDriver y WebDriverManager.
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,7 +24,7 @@ public class pasosBasicos{
 
     //Declaración de la variable estática 'driver' para el WebDriver y una instancia de WebDriverWait con un tiempo de espera de 5 segundos.
     protected static WebDriver driver;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     //Configuración del WebDriver para Chrome usando WebDriverManager.
     static{
@@ -51,6 +52,15 @@ public class pasosBasicos{
         driver.get(url);
     }
 
+    //metodo para esperar un tiempo determinado (en segundos) utilizando Thread.sleep, con manejo de excepciones.
+    public void esperar(int segundos) {
+        try {
+            Thread.sleep(segundos * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     //metodo para encontrar un elemento web utilizando un localizador
     private WebElement encontrar(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -68,6 +78,16 @@ public class pasosBasicos{
         System.out.println("URL actual: " + urlActual);
     }
 
+    //metodo esperar ventana emergente y cambiar a ella
+    public void cambiarAVentanaEmergente(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    //metodo para cambiar a la ventana principal
+    public void cambiarAVentanaPrincipal(By locator) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
     //metodo para hacer clic en un elemento web utilizando un localizador
     public void click(By locator) {
         encontrar(locator).click();
@@ -82,6 +102,44 @@ public class pasosBasicos{
     //metodo para dar clic con la tecla enter
     public void enter(By locator) {
         encontrar(locator).sendKeys(Keys.ENTER);
+    }
+
+    //metodo para esperar a que un elemento web esté presente en la página utilizando un localizador
+    public void esperarElemento(By locator){
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        // Usar JavaScript para interactuar con el select oculto
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        // Hacer visible temporalmente el select
+        js.executeScript(
+            "var select = document.getElementById('locator');" +
+            "select.style.display = 'block';" +
+            "select.style.visibility = 'visible';" +
+            "select.style.opacity = '1';" +
+            "select.style.height = 'auto';" +
+            "select.style.width = 'auto';"
+        );
+    }
+
+    //metodo para seleccionar un valor de lista despegable por valor de la lista
+    public void seleccionarXValor(By locator, String valor){
+        esperarElemento(locator);
+        System.out.println("Esta llegando aqui");
+        Select dropdown = new Select(encontrar(locator));
+        dropdown.selectByValue(valor);
+    }
+
+    
+
+    //metodo para seleccionar un valor de lista despegable por numero de orden
+    public void seleccionarXOrden(By locator, int valor){
+        Select dropdown = new Select(encontrar(locator));
+        dropdown.selectByIndex(valor);
+    }
+
+    //Metodo para tomar un objeto de la pagina y transformala en texto
+    public String obtenerTexto(By locator){ 
+        String texto = driver.findElement(locator).getText(); 
+        return texto;
     }
 
     //metodo para cerrar el navegador
