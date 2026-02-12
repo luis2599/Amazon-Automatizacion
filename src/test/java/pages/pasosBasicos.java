@@ -142,6 +142,29 @@ public class pasosBasicos{
         return texto;
     }
 
+    //metodo para verificar si un elemento es visible en la pagina
+    public boolean elementoVisible(By locator) {
+        try {
+            return encontrar(locator).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    //metodo para tomar un valor de una tabla
+    public Boolean obtenerValor(By locator) {
+        Boolean elemento = driver.findElements(locator).size() > 0;
+        System.out.println("Valor obtenido: " + elemento);
+        return elemento;
+    }
+
+    //metodo para tomar un valor de una tabla
+    public Integer obtenerCantidad(By locator) {
+        Integer elemento = driver.findElements(locator).size();
+        System.out.println("Valor obtenido: " + elemento);
+        return elemento;
+    }
+
     //metodo para cerrar el navegador
     public static void closeBrowser() {
         if (driver != null) {

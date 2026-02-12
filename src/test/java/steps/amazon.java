@@ -1,11 +1,13 @@
 package steps;
 
+import org.testng.asserts.SoftAssert;
 import io.cucumber.java.en.*;
 import pages.paginaPrincipal;
 
 public class amazon {
 
     paginaPrincipal main = new paginaPrincipal();
+    SoftAssert soft = new SoftAssert();
 
     @Given("Abre el navegador e ingresa al sitio web")
     public void navegacionTo() {
@@ -23,5 +25,24 @@ public class amazon {
     public void ingresarProducto(String producto) {
         main.ingresarProducto(producto);
     }
+
+    @Then("^(?:El buscador|Buscador|Buscar en Amazon) está disponible$")
+    public void validarBuscador() {
+        soft.assertTrue(main.buscadorDisponible(), "El buscador no está disponible");
+        soft.assertAll();
+    }
+
+    @Then("^(?:Validar que se muestran resultados relacionados con|Validar que se muestran resultados relacionados con el producto) \"([^\"]*)\"$")
+    public void validarResultados(String producto) {
+        soft.assertTrue(main.recuperarTexto().toLowerCase().contains(producto.toLowerCase()), "El producto no se encuentra en los resultados de búsqueda");
+        soft.assertAll();
+    }   
     
+    @Then("^(?:la pagina de resultados cargo de manera exitosa|Validar que la pagina de resultados cargo de manera exitosa)$")
+    public void validarCargaPaginaResultados() {      
+        soft.assertTrue(main.seccionResultadosDisponible(), "La pagina de resultados no cargo de manera exitosa");
+        soft.assertTrue(main.valorEsperado(), "No se encontraron resultados en la pagina de resultados");
+        soft.assertTrue(main.valorEsperadoCantidad() > 0, "La cantidad de resultados encontrados es 0");
+        soft.assertAll();
+    }
 }

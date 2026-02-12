@@ -18,6 +18,10 @@ public class paginaPrincipal extends pasosBasicos {
     private By modalPais = By.id("a-popover-1");
     private By opcionPais = By.id("GLUXCountryList");
     private By botonOkPais = By.xpath("//button[@name='glowDoneButton']");
+    private By textoResultados = By.xpath("//span[@class='a-color-state a-text-bold']");
+    private By cambioDireccion = By.xpath("//*[@id=\"nav-flyout-iss-anchor\"]/div[2]/div/div[3]/span[1]/span/input");
+    private By seccionResultados = By.xpath("//*[@id=\"search\"]/div[1]/div[1]");
+    private By precio = By.xpath("//span[normalize-space()='3,660,336']");
     //private By titulo = By.xpath("//*[@id=\"a-popover-1\"]");
     //private String producto = "laptop";
 
@@ -41,6 +45,28 @@ public class paginaPrincipal extends pasosBasicos {
         espe.seleccionarOpcionListaOculta(opcionPais, pais);
         click(botonOkPais);
         cambiarAVentanaPrincipal(modalPais);
+        click(cambioDireccion);
+    }
+
+    public String recuperarTexto() {
+        obtenerTexto(textoResultados);
+        return obtenerTexto(textoResultados);
+    }
+
+    public boolean buscadorDisponible() {
+        return elementoVisible(buscador);
+    }
+
+    public boolean seccionResultadosDisponible() {
+        return elementoVisible(seccionResultados);
+    }
+
+    public Boolean valorEsperado() {
+        return obtenerValor(precio);
+    }
+
+    public Integer valorEsperadoCantidad() {
+        return obtenerCantidad(precio);
     }
     
 }

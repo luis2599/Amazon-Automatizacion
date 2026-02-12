@@ -4,8 +4,10 @@ Validar que el buscador funciona correctamente.
 
     Background: Ingreso pagina web
     Given Abre el navegador e ingresa al sitio web
-    And Selecciona el pais de residencia "Alemania"
+    And Selecciona el pais de residencia "Colombia"
 
     Scenario: Busqueda de un producto
     When Ingresar el producto a buscar "laptop"
-    Then Validar que el producto se encuentra en los resultados de busqueda
+    Then El buscador está disponible
+    And Validar que se muestran resultados relacionados con "laptop"
+    And la pagina de resultados cargo de manera exitosa
