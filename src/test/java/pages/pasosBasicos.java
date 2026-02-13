@@ -32,14 +32,20 @@ public class pasosBasicos{
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<>(); 
         prefs.put("credentials_enable_service", false); 
-        prefs.put("profile.password_manager_enabled", false); 
+        prefs.put("profile.password_manager_enabled", false);
         options.setExperimentalOption("prefs", prefs); // opcionales para reducir detección de automatización options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation")); options.addArguments("--disable-blink-features=AutomationControlled");
         options.addArguments("--incognito");
+        options.addArguments("--window-size=1920,1080");
         WebDriverManager.chromedriver().setup();
         //inicializa el driver de Chrome con las opciones configuradas
         driver = new ChromeDriver(options);
+        //elimina la propiedad navigator.webdriver para evitar la detección de automatización
+        ((JavascriptExecutor) driver).executeScript(
+        "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+        );
         //maximiza la ventana del navegador
         driver.manage().window().maximize();
+        driver.manage().getCookies();
     }
 
     //Inicializa la variable estática 'driver' con una instancia de ChromeDriver
@@ -142,6 +148,12 @@ public class pasosBasicos{
         return texto;
     }
 
+    public String obtenerTextoWebElement(WebElement locator){ 
+        String texto = locator.getText();
+        System.out.println("Texto obtenido: " + texto);
+        return texto;
+    }
+
     //metodo para verificar si un elemento es visible en la pagina
     public boolean elementoVisible(By locator) {
         try {
@@ -151,14 +163,14 @@ public class pasosBasicos{
         }
     }
 
-    //metodo para tomar un valor de una tabla
+    //metodo para tomar el valor de una tabla
     public Boolean obtenerValor(By locator) {
         Boolean elemento = driver.findElements(locator).size() > 0;
         System.out.println("Valor obtenido: " + elemento);
         return elemento;
     }
 
-    //metodo para tomar un valor de una tabla
+    //metodo para tomar la cantidad de elementos encontrados en una tabla
     public Integer obtenerCantidad(By locator) {
         Integer elemento = driver.findElements(locator).size();
         System.out.println("Valor obtenido: " + elemento);
@@ -170,6 +182,11 @@ public class pasosBasicos{
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    public static void refrescarPagina() {
+        driver.navigate().refresh();
+        System.out.println("Página refrescada");
     }
     
 }

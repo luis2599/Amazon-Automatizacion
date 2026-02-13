@@ -1,53 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="14.498" tests="1" skipped="0" failures="1" errors="0" timestamp="2026-02-12T19:40:56.733497100Z">
-<testcase classname="Busqueda y validacion de resultados" name="Busqueda de un producto" time="14.256">
-<failure type="org.openqa.selenium.NoSuchElementException" message="no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//span[@class='a-color-state a-text-bold']&quot;}
-  (Session info: chrome=144.0.7559.133)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: '4.16.1', revision: '9b4c83354e'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.17'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [5c99191ddc3e7f8c42c3b225641e4185, findElement {using=xpath, value=//span[@class='a-color-state a-text-bold']}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.133, chrome: {chromedriverVersion: 144.0.7559.133 (7da823b1d59..., userDataDir: C:\Users\Usuario\AppData\Lo...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62529}, goog:processID: 19692, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62529/devtoo..., se:cdpVersion: 144.0.7559.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 5c99191ddc3e7f8c42c3b225641e4185">
-<![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//span[@class='a-color-state a-text-bold']"}
-  (Session info: chrome=144.0.7559.133)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: '4.16.1', revision: '9b4c83354e'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.17'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [5c99191ddc3e7f8c42c3b225641e4185, findElement {using=xpath, value=//span[@class='a-color-state a-text-bold']}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.133, chrome: {chromedriverVersion: 144.0.7559.133 (7da823b1d59..., userDataDir: C:\Users\Usuario\AppData\Lo...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62529}, goog:processID: 19692, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62529/devtoo..., se:cdpVersion: 144.0.7559.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 5c99191ddc3e7f8c42c3b225641e4185
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:200)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:175)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:523)
-	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:360)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:354)
-	at pages.pasosBasicos.obtenerTexto(pasosBasicos.java:141)
-	at pages.paginaPrincipal.recuperarTexto(paginaPrincipal.java:52)
-	at steps.amazon.validarResultados(amazon.java:37)
-	at ✽.Validar que se muestran resultados relacionados con "nunuinuivuv"(file:///C:/Users/Usuario/Desktop/Proyectos/Amazon/src/test/resources/features/Amazon.feature:12)
+<testsuite name="Cucumber" time="17.583" tests="1" skipped="0" failures="1" errors="0" timestamp="2026-02-13T00:13:49.071046100Z">
+<testcase classname="Busqueda y validacion de resultados" name="Validacion de resultados" time="17.404">
+<failure type="java.lang.AssertionError" message="El producto no se encuentra en los resultados patrocinados expected [true] but found [false]">
+<![CDATA[java.lang.AssertionError: El producto no se encuentra en los resultados patrocinados expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at pages.pasosEspeciales.tomarMuestrasDeResultados(pasosEspeciales.java:122)
+	at pages.resultados.validarResultados(resultados.java:22)
+	at steps.amazon.validarTextoResultado(amazon.java:61)
+	at ✽.Resultado contiene el texto buscado "estufa"(file:///C:/Users/Usuario/Desktop/Proyectos/Amazon/src/test/resources/features/Amazon.feature:18)
 ]]>
 </failure>
 <system-out><![CDATA[
 Given Abre el navegador e ingresa al sitio web..............................passed
 And Selecciona el pais de residencia "Colombia".............................passed
-When Ingresar el producto a buscar "nunuinuivuv"............................passed
-Then El buscador está disponible............................................passed
-And Validar que se muestran resultados relacionados con "nunuinuivuv".......failed
-And la pagina de resultados cargo de manera exitosa.........................skipped
+When Ingresar el producto a buscar "dron"...................................passed
+Then Existe un listado de resultados........................................passed
+And Resultado contiene el texto buscado "estufa"............................failed
 ]]></system-out>
 </testcase>
 </testsuite>

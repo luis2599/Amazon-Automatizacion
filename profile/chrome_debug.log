@@ -1,0 +1,7 @@
+[31128:6580:0212/191156.394:INFO:components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc:206] No machine level policy manager exists.
+[15120:33648:0212/191156.681:VERBOSE1:components\viz\service\main\viz_main_impl.cc:86] VizNullHypothesis is disabled (not a warning)
+[21660:19288:0212/191156.745:INFO:third_party\webrtc\rtc_base\cpu_info.cc:75] Available number of cores: 8
+[32492:28664:0212/191156.935:INFO:third_party\webrtc\rtc_base\cpu_info.cc:75] Available number of cores: 8
+[31128:22780:0212/191159.452:ERROR:google_apis\gcm\engine\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[25532:23324:0212/191205.474:WARNING:net\extras\sqlite\sqlite_persistent_store_backend_base.cc:176] Failed to post task from FlushAndNotifyInBackground@net\extras\sqlite\sqlite_persistent_store_backend_base.cc:226 to client_task_runner_.
+[25532:23324:0212/191205.474:WARNING:net\extras\sqlite\sqlite_persistent_store_backend_base.cc:176] Failed to post task from FlushAndNotifyInBackground@net\extras\sqlite\sqlite_persistent_store_backend_base.cc:226 to client_task_runner_.

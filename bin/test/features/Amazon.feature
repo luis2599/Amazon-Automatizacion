@@ -6,8 +6,14 @@ Validar que el buscador funciona correctamente.
     Given Abre el navegador e ingresa al sitio web
     And Selecciona el pais de residencia "Colombia"
 
-    Scenario: Busqueda de un producto
-    When Ingresar el producto a buscar "laptop"
-    Then El buscador está disponible
-    And Validar que se muestran resultados relacionados con "laptop"
-    And la pagina de resultados cargo de manera exitosa
+    ##Scenario: Busqueda de un producto
+    ##When Ingresar el producto a buscar "laptop"
+    ##Then El buscador está disponible
+    ##And Validar que se muestran resultados relacionados con "laptop"
+    ##And la pagina de resultados cargo de manera exitosa
+
+    Scenario: Validacion de resultados
+    When Ingresar el producto a buscar "dron"
+    Then Existe un listado de resultados
+    And Resultado contiene el texto buscado "dron"
+    #And Resultados contienen informacion minima

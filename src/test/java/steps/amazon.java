@@ -3,15 +3,19 @@ package steps;
 import org.testng.asserts.SoftAssert;
 import io.cucumber.java.en.*;
 import pages.paginaPrincipal;
+import pages.pasosBasicos;
+import pages.resultados;
 
 public class amazon {
 
     paginaPrincipal main = new paginaPrincipal();
     SoftAssert soft = new SoftAssert();
+    resultados resul = new resultados();
 
     @Given("Abre el navegador e ingresa al sitio web")
     public void navegacionTo() {
         main.navegar();
+
     }
 
     @Given("^(?:Selecciona|El usuario Selecciona) el pais de residencia \"([^\"]*)\"$")
@@ -45,4 +49,21 @@ public class amazon {
         soft.assertTrue(main.valorEsperadoCantidad() > 0, "La cantidad de resultados encontrados es 0");
         soft.assertAll();
     }
+
+    @Then("^(?:Existe un listado de resultados|Validar que existe un listado de resultados)$")
+    public void validarListadoResultados() {
+        soft.assertTrue(main.seccionResultadosDisponible(), "La pagina de resultados no cargo de manera exitosa");
+        soft.assertAll();
+    }
+
+    @Then("^(?:Resultado contiene el texto buscado|Validar que el resultado contiene el texto buscado) \"([^\"]*)\"$")
+    public void validarTextoResultado(String producto) {
+        soft.assertTrue(resul.validarResultados(producto), "No se encontraron resultados que contengan el texto buscado");
+        soft.assertAll();
+    }
+
+    /*@Then("^(?:Resultados contienen informacion minima|Validar que los resultados contienen informacion minima)$")
+    public void validarInformacionMinimaResultados() {      
+        resul.validarResultados();
+    }*/
 }
