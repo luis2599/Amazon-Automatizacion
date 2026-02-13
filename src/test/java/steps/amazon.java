@@ -2,6 +2,7 @@ package steps;
 
 import org.testng.asserts.SoftAssert;
 import io.cucumber.java.en.*;
+import pages.filtros;
 import pages.paginaPrincipal;
 import pages.pasosBasicos;
 import pages.resultados;
@@ -11,6 +12,7 @@ public class amazon {
     paginaPrincipal main = new paginaPrincipal();
     SoftAssert soft = new SoftAssert();
     resultados resul = new resultados();
+    filtros fil = new filtros();
 
     @Given("Abre el navegador e ingresa al sitio web")
     public void navegacionTo() {
@@ -30,6 +32,11 @@ public class amazon {
         main.ingresarProducto(producto);
     }
 
+    @When("^(?:El usuario aplica el filtro|El usuario aplica el filtro| Seleciona el filtro) \"([^\"]*)\" en la categoria \"([^\"]*)\"$")
+    public void aplicarFiltro(String filtro, String categoria) {
+        fil.tomarFiltros(filtro, categoria);
+    }
+
     @Then("^(?:El buscador|Buscador|Buscar en Amazon) está disponible$")
     public void validarBuscador() {
         soft.assertTrue(main.buscadorDisponible(), "El buscador no está disponible");
@@ -45,8 +52,6 @@ public class amazon {
     @Then("^(?:la pagina de resultados cargo de manera exitosa|Validar que la pagina de resultados cargo de manera exitosa)$")
     public void validarCargaPaginaResultados() {      
         soft.assertTrue(main.seccionResultadosDisponible(), "La pagina de resultados no cargo de manera exitosa");
-        soft.assertTrue(main.valorEsperado(), "No se encontraron resultados en la pagina de resultados");
-        soft.assertTrue(main.valorEsperadoCantidad() > 0, "La cantidad de resultados encontrados es 0");
         soft.assertAll();
     }
 

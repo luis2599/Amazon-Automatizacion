@@ -148,6 +148,7 @@ public class pasosBasicos{
         return texto;
     }
 
+    //Metodo para tomar un objeto de la pagina y transformala en texto, con impresion del texto obtenido
     public String obtenerTextoWebElement(WebElement locator){ 
         String texto = locator.getText();
         System.out.println("Texto obtenido: " + texto);
@@ -160,6 +161,18 @@ public class pasosBasicos{
             return encontrar(locator).isDisplayed();
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    //metodo para verificar si una ventana emergente esta activa
+    public void controlarMensajeToaster(By locator, By locatorCerrar) {
+        try {
+            encontrar(locator);
+            String mensaje = obtenerTexto(locator);
+            System.out.println("Mensaje del toaster: " + mensaje);
+            click(locatorCerrar);
+        } catch (Exception e) {
+            System.out.println("No se encontró el mensaje del toaster.");
         }
     }
 

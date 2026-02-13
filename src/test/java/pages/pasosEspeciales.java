@@ -13,6 +13,16 @@ public class pasosEspeciales extends pasosBasicos {
 
     validaciones validacion = new validaciones();
 
+    private List<WebElement> todosLosResultados;
+    private List<WebElement> patrocinados;
+    private List<WebElement> organicos;
+    private List<WebElement> masVendidos;
+    private List<WebElement> enTendencia;
+    private List<WebElement> seleccionGeneral;
+    private List<WebElement> todosLosFiltros;
+    private List<WebElement> categoria;
+    private List<WebElement> filtro;
+
     public pasosEspeciales() {
         super(driver);
     }
@@ -76,19 +86,14 @@ public class pasosEspeciales extends pasosBasicos {
         }
     }
 
-    public boolean tomarMuestrasDeResultados(By locator, String producto) {
-        System.out.println("eh llegue aqui CV");
-
+    public void tomarMuestrasDeResultados(By locator) {
         // Se toma una lista de todos los productos encontrados en la pagina de
-        // resultados
-        List<WebElement> todosLosResultados = driver.findElements(locator);
-
-        // se crean listas para cada categoria de resultados
-        List<WebElement> patrocinados = new ArrayList<>();
-        List<WebElement> organicos = new ArrayList<>();
-        List<WebElement> masVendidos = new ArrayList<>();
-        List<WebElement> enTendencia = new ArrayList<>();
-        List<WebElement> seleccionGeneral = new ArrayList<>();
+        todosLosResultados = driver.findElements(locator);
+        patrocinados = new ArrayList<>();
+        organicos = new ArrayList<>();
+        masVendidos = new ArrayList<>();
+        enTendencia = new ArrayList<>();
+        seleccionGeneral = new ArrayList<>();
 
         for (WebElement productos : todosLosResultados) {
             String texto = productos.getText();
@@ -115,10 +120,20 @@ public class pasosEspeciales extends pasosBasicos {
             }
         }
 
-        if (todosLosResultados.size() != 0) {
+        System.out.println("Se han tomado todas las muestras de los resultados de búsqueda: " + todosLosResultados.size());
+
+    }
+
+    public boolean validarResultadosXNombre(By locator, String producto) {
+
+        // Se llama al metodo tomarMuestrasDeResultados para obtener las listas de resultados de cada categoria, se le pasa el locator de los resultados y el producto buscado para validar que los resultados encontrados son relacionados al producto buscado
+        tomarMuestrasDeResultados(locator);
+
+        if (todosLosResultados != null && !todosLosResultados.isEmpty()) {
             // Validar que se hayan encontrado resultados en cada categoría
             if (!patrocinados.isEmpty()) { 
                 obtenerTextoWebElement(patrocinados.get(0));
+                //se valida que el primer resultado de cada categoria contenga el texto del producto buscado, esto para validar que los resultados encontrados son relacionados al producto buscado
                 Assert.assertTrue(obtenerTextoWebElement(patrocinados.get(0)).toLowerCase().contains(producto.toLowerCase()), "El producto no se encuentra en los resultados patrocinados");
                 System.out.println("Nombre de producto \"patrocinados\" validado: ");
             }
@@ -141,6 +156,25 @@ public class pasosEspeciales extends pasosBasicos {
         }else{
             System.out.println("No se encontraron resultados para validar");
             return false;
+        }
+    }
+
+    public void seleccionFiltro(By locator, String filtro, String titulocategoria) {
+        // Se toma una lista de todos los filtros disponibles en la pagina de resultados
+        todosLosFiltros = driver.findElements(locator);
+        categoria = new ArrayList<>();
+
+        for (WebElement categorias : todosLosFiltros) {
+            String texto = categorias.getText();
+            System.out.println("ingrese al for de categorias");
+            System.out.println("Texto del filtro: " + texto);
+            if (texto.contains(titulocategoria)) {
+                System.out.println("Categoria encontrada: " + titulocategoria);
+                categoria.add(categorias);
+                break; // Salir del bucle una vez que se encuentra la categoría
+            }else{
+                System.out.println("Categoria no encontrada: " + titulocategoria);
+            }
         }
     }
 

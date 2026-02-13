@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="17.583" tests="1" skipped="0" failures="1" errors="0" timestamp="2026-02-13T00:13:49.071046100Z">
-<testcase classname="Busqueda y validacion de resultados" name="Validacion de resultados" time="17.404">
-<failure type="java.lang.AssertionError" message="El producto no se encuentra en los resultados patrocinados expected [true] but found [false]">
-<![CDATA[java.lang.AssertionError: El producto no se encuentra en los resultados patrocinados expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1590)
-	at org.testng.Assert.assertTrue(Assert.java:57)
-	at pages.pasosEspeciales.tomarMuestrasDeResultados(pasosEspeciales.java:122)
-	at pages.resultados.validarResultados(resultados.java:22)
-	at steps.amazon.validarTextoResultado(amazon.java:61)
-	at ✽.Resultado contiene el texto buscado "estufa"(file:///C:/Users/Usuario/Desktop/Proyectos/Amazon/src/test/resources/features/Amazon.feature:18)
-]]>
-</failure>
+<testsuite name="Cucumber" time="22.473" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-13T23:00:00.468576100Z">
+<testcase classname="Busqueda y validacion de resultados" name="Aplicacion de filtro" time="22.268">
 <system-out><![CDATA[
 Given Abre el navegador e ingresa al sitio web..............................passed
 And Selecciona el pais de residencia "Colombia".............................passed
-When Ingresar el producto a buscar "dron"...................................passed
-Then Existe un listado de resultados........................................passed
-And Resultado contiene el texto buscado "estufa"............................failed
+When El usuario ingresa el producto a buscar "iphone".......................passed
+And El usuario aplica el filtro "Apple" en la categoria "Marcas"............passed
 ]]></system-out>
 </testcase>
 </testsuite>

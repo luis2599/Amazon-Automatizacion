@@ -22,6 +22,7 @@ public class paginaPrincipal extends pasosBasicos {
     private By cambioDireccion = By.xpath("//*[@id=\"nav-flyout-iss-anchor\"]/div[2]/div/div[3]/span[1]/span/input");
     private By seccionResultados = By.xpath("//*[@id=\"search\"]/div[1]");
     private By precio = By.xpath("//span[normalize-space()='3,660,336']");
+    private By mensajeToaster = By.xpath("//div[@class='glow-toaster-content']");
     //private By titulo = By.xpath("//*[@id=\"a-popover-1\"]");
     //private String producto = "laptop";
 
@@ -46,7 +47,7 @@ public class paginaPrincipal extends pasosBasicos {
         espe.seleccionarOpcionListaOculta(opcionPais, pais);
         click(botonOkPais);
         cambiarAVentanaPrincipal(modalPais);
-        //click(cambioDireccion); cambiar a que valide si esta activa la ventana emergente y si esta activa, cambiar a ella, seleccionar el pais y luego cambiar a la ventana principal, esto para evitar errores en caso de que la ventana emergente no aparezca por alguna razon
+        controlarMensajeToaster(mensajeToaster, cambioDireccion);
     }
 
     public String recuperarTexto() {

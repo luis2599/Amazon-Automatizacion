@@ -19,6 +19,6 @@ public class resultados extends pasosBasicos {
     }
 
     public boolean validarResultados(String producto) {
-        return espe.tomarMuestrasDeResultados(contenedorResultados, producto);
+        return espe.validarResultadosXNombre(contenedorResultados, producto);
     }
 }

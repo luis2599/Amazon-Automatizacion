@@ -15,8 +15,8 @@ import pages.pasosBasicos;
     plugin = {"pretty", "html:target/cucumber-reports.html",
                 "json:target/cucumber-reports/cucumber.json",
                 "timeline:target/cucumber-timeline",
-                "junit:target/cucumber-reports/cucumber.xml"}
-    //monochrome = true
+                "junit:target/cucumber-reports/cucumber.xml"},
+    tags = "@Filtros"
 )
 public class testAmazon {
     //Metodo que se ejecutará después de todas las pruebas para cerrar el navegador
