@@ -19,10 +19,9 @@ Validar que el buscador funciona correctamente.
     When Ingresar el producto a buscar "dron"
     Then Existe un listado de resultados
     And Resultado contiene el texto buscado "dron"
-    #And Resultados contienen informacion minima
 
     @Filtros
     Scenario: Aplicacion de filtro
     When El usuario ingresa el producto a buscar "iphone"
     And El usuario aplica el filtro "Apple" en la categoria "Marcas"
-    #Then Validar que se muestran resultados relacionados con "iphone" y "Apple"
+    Then Validar que se muestran resultados relacionados con "iphone" y "Apple"

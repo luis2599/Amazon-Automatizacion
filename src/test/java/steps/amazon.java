@@ -67,6 +67,13 @@ public class amazon {
         soft.assertAll();
     }
 
+    @Then("^(?:Validar que se muestran resultados relacionados con|Validar que se muestran resultados relacionados con el producto) \"([^\"]*)\" y \"([^\"]*)\"$")
+    public void validarResultadosConFiltro(String producto, String filtro) {   
+        soft.assertTrue(main.recuperarTexto().toLowerCase().contains(producto.toLowerCase()), "El producto no se encuentra en los resultados de búsqueda");
+        soft.assertTrue(fil.validarFiltroAplicado(filtro), "El filtro aplicado no se encuentra en los resultados de búsqueda");
+        soft.assertAll();
+    }
+
     /*@Then("^(?:Resultados contienen informacion minima|Validar que los resultados contienen informacion minima)$")
     public void validarInformacionMinimaResultados() {      
         resul.validarResultados();

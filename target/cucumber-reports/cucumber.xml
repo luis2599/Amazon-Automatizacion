@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="22.473" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-13T23:00:00.468576100Z">
-<testcase classname="Busqueda y validacion de resultados" name="Aplicacion de filtro" time="22.268">
+<testsuite name="Cucumber" time="29.819" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-15T20:37:58.036055100Z">
+<testcase classname="Busqueda y validacion de resultados" name="Aplicacion de filtro" time="29.633">
 <system-out><![CDATA[
 Given Abre el navegador e ingresa al sitio web..............................passed
 And Selecciona el pais de residencia "Colombia".............................passed
 When El usuario ingresa el producto a buscar "iphone".......................passed
 And El usuario aplica el filtro "Apple" en la categoria "Marcas"............passed
+Then Validar que se muestran resultados relacionados con "iphone" y "Apple".passed
 ]]></system-out>
 </testcase>
 </testsuite>

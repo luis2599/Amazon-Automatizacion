@@ -17,6 +17,7 @@ public class hooks extends pasosBasicos {
 
     @After
     public void tearDown(Scenario scenario){
+        esperar(2);
         // Capturar evidencia siempre
         final byte[] evidencia = ((TakesScreenshot) driver)
                     .getScreenshotAs(OutputType.BYTES);

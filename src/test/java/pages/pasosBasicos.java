@@ -59,7 +59,7 @@ public class pasosBasicos{
     }
 
     //metodo para esperar un tiempo determinado (en segundos) utilizando Thread.sleep, con manejo de excepciones.
-    public void esperar(int segundos) {
+    public static void esperar(int segundos) {
         try {
             Thread.sleep(segundos * 1000);
         } catch (InterruptedException e) {
@@ -68,7 +68,7 @@ public class pasosBasicos{
     }
 
     //metodo para encontrar un elemento web utilizando un localizador
-    private WebElement encontrar(By locator) {
+    public WebElement encontrar(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         if (driver.findElements(locator).size() > 0) {
             System.out.println("Elemento encontrado: " + locator.toString());
@@ -190,6 +190,11 @@ public class pasosBasicos{
         return elemento;
     }
 
+    public void scrollHaciaElemento(By locator) {
+        WebElement elemento = encontrar(locator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", elemento);
+    }
+
     //metodo para cerrar el navegador
     public static void closeBrowser() {
         if (driver != null) {
@@ -197,6 +202,7 @@ public class pasosBasicos{
         }
     }
 
+    //metodo para refrescar la pagina
     public static void refrescarPagina() {
         driver.navigate().refresh();
         System.out.println("Página refrescada");

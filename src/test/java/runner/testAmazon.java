@@ -22,6 +22,7 @@ public class testAmazon {
     //Metodo que se ejecutará después de todas las pruebas para cerrar el navegador
     @AfterClass
     public static void tearDown() {
+        pasosBasicos.esperar(1);
         pasosBasicos.closeBrowser();
     }
 }

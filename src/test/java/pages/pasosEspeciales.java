@@ -14,6 +14,7 @@ public class pasosEspeciales extends pasosBasicos {
     validaciones validacion = new validaciones();
 
     private List<WebElement> todosLosResultados;
+    private List<WebElement> elementos;
     private List<WebElement> patrocinados;
     private List<WebElement> organicos;
     private List<WebElement> masVendidos;
@@ -159,23 +160,44 @@ public class pasosEspeciales extends pasosBasicos {
         }
     }
 
-    public void seleccionFiltro(By locator, String filtro, String titulocategoria) {
+    public void busquedaDeFiltro(By locator, String filtro, String titulocategoria) {
         // Se toma una lista de todos los filtros disponibles en la pagina de resultados
         todosLosFiltros = driver.findElements(locator);
         categoria = new ArrayList<>();
-
         for (WebElement categorias : todosLosFiltros) {
             String texto = categorias.getText();
-            System.out.println("ingrese al for de categorias");
-            System.out.println("Texto del filtro: " + texto);
             if (texto.contains(titulocategoria)) {
                 System.out.println("Categoria encontrada: " + titulocategoria);
-                categoria.add(categorias);
+                esperar(10);
+                //Se crea una variable By para asignarle de ubicación donde esta checkbox del filtro a seleccionar
+                By checkCategoria = By.xpath("//div[contains(@id,'s-refinements')]//a[.//span[contains(@class,'a-color-base') and contains(text(),'"+filtro+"')]]");
+                //Se busca en la página todos los elementos que coincidan con el XPath
+                elementos = driver.findElements(checkCategoria);
+                categoria.addAll(elementos);
                 break; // Salir del bucle una vez que se encuentra la categoría
             }else{
                 System.out.println("Categoria no encontrada: " + titulocategoria);
             }
         }
+    }
+
+
+    public void seleccionFiltro(By locator, String filtro, String titulocategoria) {
+        
+        busquedaDeFiltro(locator, filtro, titulocategoria);
+        System.out.println(categoria.get(0).getText());
+        if (!categoria.isEmpty()) {
+            // Usar JavaScript para hacer scroll hasta el elemento y luego hacer clic
+            ((JavascriptExecutor) pasosBasicos.driver).executeScript(
+            "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});",
+            categoria.get(0)
+            );
+            esperar(3);
+            categoria.get(0).click();
+        } else {
+            System.out.println("No se encontraron categorías para seleccionar el filtro.");
+        }
+        
     }
 
 }
