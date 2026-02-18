@@ -37,6 +37,11 @@ public class amazon {
         fil.tomarFiltros(filtro, categoria);
     }
 
+    @When("^(?:El usuario selecciona un resultado|Selecciona un resultado)$")
+    public void seleccionarResultado() {
+        resul.seleccionarResultado();
+    }
+
     @Then("^(?:El buscador|Buscador|Buscar en Amazon) está disponible$")
     public void validarBuscador() {
         soft.assertTrue(main.buscadorDisponible(), "El buscador no está disponible");
@@ -71,6 +76,26 @@ public class amazon {
     public void validarResultadosConFiltro(String producto, String filtro) {   
         soft.assertTrue(main.recuperarTexto().toLowerCase().contains(producto.toLowerCase()), "El producto no se encuentra en los resultados de búsqueda");
         soft.assertTrue(fil.validarFiltroAplicado(filtro), "El filtro aplicado no se encuentra en los resultados de búsqueda");
+        soft.assertAll();
+    }
+
+    @Then("^(?:Validar que se muestra la pagina de detalles del producto|Validar que se muestra la pagina de detalles del producto)$")
+    public void validarPaginaDetallesProducto() {
+        soft.assertTrue(resul.ValidarTituloProducto(), "No se muestra la pagina de detalles del producto o el titulo del producto no esta disponible");
+        soft.assertTrue(resul.validarPrecioProducto(), "El precio del producto no esta disponible en la pagina de detalles del producto");
+        soft.assertAll();
+
+    }
+
+    @Then("^(?:Validar que el boton de compra esta disponible|Validar que el boton de compra esta disponible)$")
+    public void validarBotonCompra() {
+        soft.assertTrue(resul.validarBotonCompra(), "El boton de compra no esta habilitado para este producto o no se encuentra en la pagina de detalles del producto");
+        soft.assertAll();
+    }
+
+    @Then("^(?:Validar que exista la seccion de informacion del producto|Validar que exista la seccion de informacion del producto)$")
+    public void validarSeccionInfoProducto() { 
+        soft.assertTrue(resul.validarSeccionInfoProducto(), "La seccion de informacion del producto no esta disponible en la pagina de detalles del producto");
         soft.assertAll();
     }
 

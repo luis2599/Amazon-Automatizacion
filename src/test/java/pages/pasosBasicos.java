@@ -16,6 +16,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.cucumber.java.sl.In;
 //importación de la clase WebDriverManager para gestionar las dependencias del controlador del navegador.
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -35,7 +37,9 @@ public class pasosBasicos{
         prefs.put("profile.password_manager_enabled", false);
         options.setExperimentalOption("prefs", prefs); // opcionales para reducir detección de automatización options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation")); options.addArguments("--disable-blink-features=AutomationControlled");
         options.addArguments("--incognito");
+        options.addArguments("--disable-blink-features=AutomationControlled");
         options.addArguments("--window-size=1920,1080");
+        options.setExperimentalOption("useAutomationExtension", false);
         WebDriverManager.chromedriver().setup();
         //inicializa el driver de Chrome con las opciones configuradas
         driver = new ChromeDriver(options);
@@ -69,12 +73,13 @@ public class pasosBasicos{
 
     //metodo para encontrar un elemento web utilizando un localizador
     public WebElement encontrar(By locator) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        if (driver.findElements(locator).size() > 0) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            WebElement elemento = driver.findElement(locator);
             System.out.println("Elemento encontrado: " + locator.toString());
-            return driver.findElement(locator);
-        } else {
-            throw new RuntimeException("Elemento no encontrado: " + locator.toString());
+            return elemento;
+        } catch (Exception e) {
+            throw new RuntimeException("Elemento no encontrado: " + locator.toString(), e);
         }
     }
 
@@ -155,6 +160,15 @@ public class pasosBasicos{
         return texto;
     }
 
+    //metodo para tomar un objeto de la pagina y transformala en numero, con impresion del numero obtenido
+    public Integer obtenerNumero(By locator) {
+        String texto = driver.findElement(locator).getText();
+        String numeroTexto = texto.replaceAll("\\D+", ""); // Elimina todo excepto los dígitos
+        Integer numero = Integer.parseInt(numeroTexto); // Convierte el texto a un número entero
+        System.out.println("Número obtenido: " + numero);
+        return numero;
+    }
+
     //metodo para verificar si un elemento es visible en la pagina
     public boolean elementoVisible(By locator) {
         try {
@@ -190,9 +204,10 @@ public class pasosBasicos{
         return elemento;
     }
 
+    //metodo para hacer scroll hacia un elemento web utilizando un localizador
     public void scrollHaciaElemento(By locator) {
         WebElement elemento = encontrar(locator);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", elemento);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'nearest'});", elemento);
     }
 
     //metodo para cerrar el navegador

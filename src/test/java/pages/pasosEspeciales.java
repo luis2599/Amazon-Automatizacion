@@ -11,8 +11,13 @@ import org.testng.Assert;
 
 public class pasosEspeciales extends pasosBasicos {
 
+    // Se crea una instancia de la clase validaciones para utilizar sus métodos de
+    // validación en esta clase.
     validaciones validacion = new validaciones();
 
+    // Se declaran varias listas de WebElement para almacenar diferentes categorías
+    // de resultados de búsqueda, así como una lista para almacenar todos los
+    // resultados y otra para los filtros disponibles.
     private List<WebElement> todosLosResultados;
     private List<WebElement> elementos;
     private List<WebElement> patrocinados;
@@ -28,6 +33,9 @@ public class pasosEspeciales extends pasosBasicos {
         super(driver);
     }
 
+    // Se define un método para seleccionar una opción de una lista oculta,
+    // utilizando JavaScript para hacer visible temporalmente el elemento y luego
+    // interactuar con él.
     public void seleccionarOpcionListaOculta(By locator, String valor) {
         try {
             // Esperar a que el select esté presente
@@ -87,6 +95,10 @@ public class pasosEspeciales extends pasosBasicos {
         }
     }
 
+    // Se define un método para tomar muestras de los resultados de búsqueda,
+    // clasificándolos en diferentes categorías según su contenido (patrocinados,
+    // orgánicos, más vendidos, en tendencia, selección general) y almacenándolos en
+    // listas correspondientes.
     public void tomarMuestrasDeResultados(By locator) {
         // Se toma una lista de todos los productos encontrados en la pagina de
         todosLosResultados = driver.findElements(locator);
@@ -121,45 +133,67 @@ public class pasosEspeciales extends pasosBasicos {
             }
         }
 
-        System.out.println("Se han tomado todas las muestras de los resultados de búsqueda: " + todosLosResultados.size());
+        System.out.println(
+                "Se han tomado todas las muestras de los resultados de búsqueda: " + todosLosResultados.size());
 
     }
 
+    // Se define un método para validar que los resultados de búsqueda contienen el
+    // nombre del producto buscado, utilizando el método tomarMuestrasDeResultados
+    // para obtener las listas de resultados de cada categoría y luego validando que
+    // el primer resultado de cada categoría contenga el texto del producto buscado.
     public boolean validarResultadosXNombre(By locator, String producto) {
 
-        // Se llama al metodo tomarMuestrasDeResultados para obtener las listas de resultados de cada categoria, se le pasa el locator de los resultados y el producto buscado para validar que los resultados encontrados son relacionados al producto buscado
+        // Se llama al metodo tomarMuestrasDeResultados para obtener las listas de
+        // resultados de cada categoria, se le pasa el locator de los resultados y el
+        // producto buscado para validar que los resultados encontrados son relacionados
+        // al producto buscado
         tomarMuestrasDeResultados(locator);
 
         if (todosLosResultados != null && !todosLosResultados.isEmpty()) {
             // Validar que se hayan encontrado resultados en cada categoría
-            if (!patrocinados.isEmpty()) { 
+            if (!patrocinados.isEmpty()) {
                 obtenerTextoWebElement(patrocinados.get(0));
-                //se valida que el primer resultado de cada categoria contenga el texto del producto buscado, esto para validar que los resultados encontrados son relacionados al producto buscado
-                Assert.assertTrue(obtenerTextoWebElement(patrocinados.get(0)).toLowerCase().contains(producto.toLowerCase()), "El producto no se encuentra en los resultados patrocinados");
+                // se valida que el primer resultado de cada categoria contenga el texto del
+                // producto buscado, esto para validar que los resultados encontrados son
+                // relacionados al producto buscado
+                Assert.assertTrue(
+                        obtenerTextoWebElement(patrocinados.get(0)).toLowerCase().contains(producto.toLowerCase()),
+                        "El producto no se encuentra en los resultados patrocinados");
                 System.out.println("Nombre de producto \"patrocinados\" validado: ");
             }
             if (!organicos.isEmpty()) {
                 obtenerTextoWebElement(organicos.get(0));
-                Assert.assertTrue(obtenerTextoWebElement(organicos.get(0)).toLowerCase().contains(producto.toLowerCase()), "El producto no se encuentra en los resultados patrocinados");
+                Assert.assertTrue(
+                        obtenerTextoWebElement(organicos.get(0)).toLowerCase().contains(producto.toLowerCase()),
+                        "El producto no se encuentra en los resultados patrocinados");
                 System.out.println("Nombre de producto \"organicos\" validado: ");
             }
             if (!masVendidos.isEmpty()) {
                 obtenerTextoWebElement(masVendidos.get(0)); // Primer "Más vendido"
-                Assert.assertTrue(obtenerTextoWebElement(masVendidos.get(0)).toLowerCase().contains(producto.toLowerCase()), "El producto no se encuentra en los resultados más vendidos");
+                Assert.assertTrue(
+                        obtenerTextoWebElement(masVendidos.get(0)).toLowerCase().contains(producto.toLowerCase()),
+                        "El producto no se encuentra en los resultados más vendidos");
                 System.out.println("Nombre de producto \"más vendidos\" validado: ");
             }
             if (!enTendencia.isEmpty()) {
                 obtenerTextoWebElement(enTendencia.get(0)); // Primer "En tendencia"
-                Assert.assertTrue(obtenerTextoWebElement(enTendencia.get(0)).toLowerCase().contains(producto.toLowerCase()), "El producto no se encuentra en los resultados en tendencia");
+                Assert.assertTrue(
+                        obtenerTextoWebElement(enTendencia.get(0)).toLowerCase().contains(producto.toLowerCase()),
+                        "El producto no se encuentra en los resultados en tendencia");
                 System.out.println("Nombre de producto \"en tendencia\" validado: ");
             }
             return true;
-        }else{
+        } else {
             System.out.println("No se encontraron resultados para validar");
             return false;
         }
     }
 
+    // Se define un método para buscar un filtro específico dentro de una categoría
+    // determinada, almacenando los filtros encontrados en una lista y luego
+    // seleccionando el filtro deseado utilizando JavaScript para hacer scroll hasta
+    // el elemento y hacer clic en él.
     public void busquedaDeFiltro(By locator, String filtro, String titulocategoria) {
         // Se toma una lista de todos los filtros disponibles en la pagina de resultados
         todosLosFiltros = driver.findElements(locator);
@@ -169,35 +203,124 @@ public class pasosEspeciales extends pasosBasicos {
             if (texto.contains(titulocategoria)) {
                 System.out.println("Categoria encontrada: " + titulocategoria);
                 esperar(10);
-                //Se crea una variable By para asignarle de ubicación donde esta checkbox del filtro a seleccionar
-                By checkCategoria = By.xpath("//div[contains(@id,'s-refinements')]//a[.//span[contains(@class,'a-color-base') and contains(text(),'"+filtro+"')]]");
-                //Se busca en la página todos los elementos que coincidan con el XPath
+                // Se crea una variable By para asignarle de ubicación donde esta checkbox del
+                // filtro a seleccionar
+                By checkCategoria = By.xpath(
+                        "//div[contains(@id,'s-refinements')]//a[.//span[contains(@class,'a-color-base') and contains(text(),'"
+                                + filtro + "')]]");
+                // Se busca en la página todos los elementos que coincidan con el XPath
                 elementos = driver.findElements(checkCategoria);
                 categoria.addAll(elementos);
                 break; // Salir del bucle una vez que se encuentra la categoría
-            }else{
+            } else {
                 System.out.println("Categoria no encontrada: " + titulocategoria);
             }
         }
     }
 
-
+    // Se define un método para seleccionar un filtro específico dentro de una
+    // categoría determinada, utilizando el método busquedaDeFiltro para encontrar
+    // el filtro deseado y luego haciendo scroll hasta el elemento y haciendo clic
+    // en él.
     public void seleccionFiltro(By locator, String filtro, String titulocategoria) {
-        
+
         busquedaDeFiltro(locator, filtro, titulocategoria);
         System.out.println(categoria.get(0).getText());
         if (!categoria.isEmpty()) {
             // Usar JavaScript para hacer scroll hasta el elemento y luego hacer clic
             ((JavascriptExecutor) pasosBasicos.driver).executeScript(
-            "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});",
-            categoria.get(0)
-            );
+                    "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});",
+                    categoria.get(0));
             esperar(3);
             categoria.get(0).click();
         } else {
             System.out.println("No se encontraron categorías para seleccionar el filtro.");
         }
-        
+
     }
 
+    public void seleccionarArticulo(By locator, By locatorTitulo) {
+
+        // Se llama al metodo tomarMuestrasDeResultados para obtener las listas de
+        // resultados de cada categoria, se le pasa el locator de los resultados y el
+        // producto buscado para validar que los resultados encontrados son relacionados
+        // al producto buscado
+        tomarMuestrasDeResultados(locator);
+        // Se valida que existan resultados orgánicos para seleccionar, ya que los
+        // patrocinados pueden variar mucho y no siempre están presentes, mientras que
+        // los orgánicos suelen ser más consistentes.
+        if (!masVendidos.isEmpty()) {
+            // Usar JavaScript para hacer scroll hasta el elemento y luego hacer clic
+            ((JavascriptExecutor) pasosBasicos.driver).executeScript(
+                    "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});",
+                    masVendidos.get(0));
+            WebElement texto = masVendidos.get(0);
+            WebElement titulo = obtenerUbicacioElement(locatorTitulo, texto);
+            titulo.click();
+        }
+    }
+
+    // Se define un método para obtener un elemento web específico dentro de un
+    // resultado de búsqueda, utilizando un localizador y el elemento del resultado
+    // como referencia.
+    public WebElement obtenerUbicacioElement(By locator, WebElement producto) {
+        try {
+            WebElement tituloElement = producto.findElement(locator);
+            return tituloElement;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    // Se define un método para obtener el texto de un elemento web específico
+    // dentro de un resultado de búsqueda, utilizando un localizador y el elemento
+    // del resultado como referencia.
+    public String obtenerTextoWebElement(By locator, WebElement elemento) {
+        try {
+            WebElement tituloElement = elemento.findElement(locator);
+            String texto = tituloElement.getText();
+            System.out.println("Texto obtenido: " + texto);
+            return texto;
+        } catch (Exception e) {
+            System.out.println("No se pudo obtener el texto del elemento: " + locator.toString());
+            return null;
+        }
+    }
+
+    // Se define un método para obtener el título de un producto específico dentro de los
+    public String obtenerDatoProducto(By locator, By locatorTitulo) {
+        // Se llama al metodo tomarMuestrasDeResultados para obtener las listas de
+        // resultados de cada categoria, se le pasa el locator de los resultados y el
+        // producto buscado para validar que los resultados encontrados son relacionados
+        // al producto buscado
+        tomarMuestrasDeResultados(locator);
+        // Se valida que existan resultados orgánicos para seleccionar, ya que los
+        // patrocinados pueden variar mucho y no siempre están presentes, mientras que
+        // los orgánicos suelen ser más consistentes.
+        if (!masVendidos.isEmpty()) {
+            // Usar JavaScript para hacer scroll hasta el elemento y luego hacer clic
+            ((JavascriptExecutor) pasosBasicos.driver).executeScript(
+                    "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});",
+                    masVendidos.get(0));
+            WebElement texto = masVendidos.get(0);
+            String titulo = obtenerTextoWebElement(locatorTitulo, texto);
+            System.out.println("Título del producto: " + titulo);
+            return titulo;
+        } else {
+            System.out.println("No se encontraron resultados orgánicos para obtener el dato del producto.");
+            return null;
+        }
+    }
+
+    // Se define un método para validar que el hay un precio del producto visible en la página de detalles del producto, utilizando un localizador para encontrar el elemento del precio y luego obteniendo su texto para validar que no esté vacío o nulo.
+    public boolean validarPrecioProductoSeleccionado(By locator) {
+        Integer precio = obtenerNumero(locator);
+        if (precio != null && precio > 0) {
+            System.out.println("El precio del producto seleccionado es: " + precio);
+            return true;
+        } else {
+            System.out.println("No se pudo obtener el precio del producto seleccionado.");
+            return false;
+        }
+    }
 }

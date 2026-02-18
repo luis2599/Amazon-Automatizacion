@@ -25,3 +25,11 @@ Validar que el buscador funciona correctamente.
     When El usuario ingresa el producto a buscar "iphone"
     And El usuario aplica el filtro "Apple" en la categoria "Marcas"
     Then Validar que se muestran resultados relacionados con "iphone" y "Apple"
+
+    @SeleccionProducto
+    Scenario: Seleccion de un producto
+    When El usuario ingresa el producto a buscar "auriculares"
+    And El usuario selecciona un resultado
+    Then Validar que se muestra la pagina de detalles del producto
+    And Validar que el boton de compra esta disponible
+    And Validar que exista la seccion de informacion del producto

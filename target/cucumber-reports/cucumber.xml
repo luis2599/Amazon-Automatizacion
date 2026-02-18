@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="29.819" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-02-15T20:37:58.036055100Z">
-<testcase classname="Busqueda y validacion de resultados" name="Aplicacion de filtro" time="29.633">
+<testsuite name="Cucumber" time="98.449" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-02-18T21:54:43.235443700Z">
+<testcase classname="Busqueda y validacion de resultados" name="Busqueda de un producto" time="15.05">
+<system-out><![CDATA[
+Given Abre el navegador e ingresa al sitio web..............................passed
+And Selecciona el pais de residencia "Colombia".............................passed
+When Ingresar el producto a buscar "laptop".................................passed
+Then El buscador está disponible............................................passed
+And Validar que se muestran resultados relacionados con "laptop"............passed
+And la pagina de resultados cargo de manera exitosa.........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Busqueda y validacion de resultados" name="Validacion de resultados" time="22.081">
+<system-out><![CDATA[
+Given Abre el navegador e ingresa al sitio web..............................passed
+And Selecciona el pais de residencia "Colombia".............................passed
+When Ingresar el producto a buscar "dron"...................................passed
+Then Existe un listado de resultados........................................passed
+And Resultado contiene el texto buscado "dron"..............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Busqueda y validacion de resultados" name="Aplicacion de filtro" time="35.759">
 <system-out><![CDATA[
 Given Abre el navegador e ingresa al sitio web..............................passed
 And Selecciona el pais de residencia "Colombia".............................passed
 When El usuario ingresa el producto a buscar "iphone".......................passed
 And El usuario aplica el filtro "Apple" en la categoria "Marcas"............passed
 Then Validar que se muestran resultados relacionados con "iphone" y "Apple".passed
+]]></system-out>
+</testcase>
+<testcase classname="Busqueda y validacion de resultados" name="Seleccion de un producto" time="25.32">
+<system-out><![CDATA[
+Given Abre el navegador e ingresa al sitio web..............................passed
+And Selecciona el pais de residencia "Colombia".............................passed
+When El usuario ingresa el producto a buscar "auriculares"..................passed
+And El usuario selecciona un resultado......................................passed
+Then Validar que se muestra la pagina de detalles del producto..............passed
+And Validar que el boton de compra esta disponible..........................passed
+And Validar que exista la seccion de informacion del producto...............passed
 ]]></system-out>
 </testcase>
 </testsuite>

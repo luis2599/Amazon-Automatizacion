@@ -24,6 +24,7 @@ public class filtros extends pasosBasicos {
 
         By filtroActivo = By.xpath("//div[contains(@id,'s-refinements')]//a[.//span[contains(@class,'a-color-base') and contains(text(),'"+ filtro + "')]]");
         esperar(2);
+        // Se obtiene el atributo "aria-current" del filtro para verificar si está activo
         String estado = driver.findElement(filtroActivo).getAttribute("aria-current");
         System.out.println("Estado del filtro '" + filtro + "': " + estado);
         if (estado.equals("true")) {

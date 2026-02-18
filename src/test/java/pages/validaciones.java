@@ -37,7 +37,8 @@ public class validaciones extends pasosBasicos {
 
     public boolean validarContieneTitulo(WebElement locator) {
         try {
-            WebElement titulo = locator.findElement(By.xpath(".//h2 | .//a[contains(@class, 'title')]"));            String textoTitulo = titulo.getText();
+            WebElement titulo = locator.findElement(By.xpath(".//h2 | .//a[contains(@class, 'title')]"));            
+            String textoTitulo = titulo.getText();
             soft.assertTrue(textoTitulo != null && textoTitulo.length() > 5,
                     "Título del producto es muy corto o nulo");
             return true;
@@ -45,6 +46,32 @@ public class validaciones extends pasosBasicos {
             soft.assertTrue(false, "Producto sin título");
             return false; // No fatal, se reporta
         }
-    }   
+    } 
+    
+    public boolean validarContienePrecio(WebElement locator) {
+        try {
+            WebElement precio = locator.findElement(By.xpath(".//span[contains(@class, 'price')] | .//div[contains(@class, 'price')]"));
+            String textoPrecio = precio.getText();
+            soft.assertTrue(textoPrecio != null && textoPrecio.matches(".*\\d.*"),
+                    "Precio del producto no contiene números o es nulo");
+            return true;
+        } catch (NoSuchElementException e) {
+            soft.assertTrue(false, "Producto sin precio");
+            return false; // No fatal, se reporta
+        }
+    }
+
+    public boolean validarContieneValoracion(WebElement locator) {
+        try {
+            WebElement valoracion = locator.findElement(By.xpath(".//span[contains(@class, 'rating')] | .//div[contains(@class, 'rating')]"));
+            String textoValoracion = valoracion.getText();
+            soft.assertTrue(textoValoracion != null && textoValoracion.matches(".*\\d.*"),
+                    "Valoración del producto no contiene números o es nulo");
+            return true;
+        } catch (NoSuchElementException e) {
+            soft.assertTrue(false, "Producto sin valoración");
+            return false; // No fatal, se reporta
+        }
+    }
 
 }
