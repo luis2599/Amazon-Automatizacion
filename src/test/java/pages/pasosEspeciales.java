@@ -307,7 +307,7 @@ public class pasosEspeciales extends pasosBasicos {
             System.out.println("Título del producto: " + titulo);
             return titulo;
         } else {
-            System.out.println("No se encontraron resultados orgánicos para obtener el dato del producto.");
+            System.out.println("No se encontraron resultados Mas Vendidos para obtener el dato del producto.");
             return null;
         }
     }
