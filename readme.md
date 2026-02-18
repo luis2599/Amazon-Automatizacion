@@ -126,15 +126,6 @@ Generados automáticamente en:
 
 Luis Miguel Abril Sanguña  
 QA Automation Engineer
-"""
-
-file_path = "/mnt/data/README.md"
-
-pypandoc.convert_text(
-    readme_content,
-    'md',
-    format='md',
-    outputfile=file_path,
     extra_args=['--standalone']
 )
 
