@@ -123,3 +123,10 @@ Generados automáticamente en:
 
 Luis Miguel Abril Sanguña  
 QA Automation Engineer
+<<<<<<< HEAD
+=======
+    extra_args=['--standalone']
+)
+
+file_path
+>>>>>>> 12b666b6566c1783bae858a37452be73f4cd1859
