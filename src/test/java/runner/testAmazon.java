@@ -16,13 +16,13 @@ import pages.pasosBasicos;
                 "json:target/cucumber-reports/cucumber.json",
                 "timeline:target/cucumber-timeline",
                 "junit:target/cucumber-reports/cucumber.xml"},
-    tags = "@Amazon"
+    tags = "@Busqueda"
 )
+
 public class testAmazon {
     //Metodo que se ejecutará después de todas las pruebas para cerrar el navegador
     @AfterClass
     public static void tearDown() {
-        pasosBasicos.esperar(1);
         pasosBasicos.closeBrowser();
     }
 }

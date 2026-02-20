@@ -4,7 +4,6 @@ import org.testng.asserts.SoftAssert;
 import io.cucumber.java.en.*;
 import pages.filtros;
 import pages.paginaPrincipal;
-import pages.pasosBasicos;
 import pages.resultados;
 
 public class amazon {

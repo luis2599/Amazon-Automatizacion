@@ -1,30 +1,23 @@
 package pages;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
+
 
 public class paginaPrincipal extends pasosBasicos {
 
     pasosEspeciales espe = new pasosEspeciales();
 
-    private By buscador = By.xpath("//input[@id='twotabsearchtextbox']");
-    private By botonPais = By.xpath("//*[@id=\"nav-packard-glow-loc-icon\"]");
-    private By modalPais = By.id("a-popover-1");
-    private By opcionPais = By.id("GLUXCountryList");
-    private By botonOkPais = By.xpath("//button[@name='glowDoneButton']");
-    private By textoResultados = By.xpath("//span[@class='a-color-state a-text-bold']");
-    private By cambioDireccion = By.xpath("//*[@id=\"nav-flyout-iss-anchor\"]/div[2]/div/div[3]/span[1]/span/input");
-    private By seccionResultados = By.xpath("//*[@id=\"search\"]/div[1]");
-    private By precio = By.xpath("//span[normalize-space()='3,660,336']");
-    private By mensajeToaster = By.xpath("//div[@class='glow-toaster-content']");
-    //private By titulo = By.xpath("//*[@id=\"a-popover-1\"]");
-    //private String producto = "laptop";
+    //Se heredan los locators definidos en la pagina locators.java
+    By buscador = locators.paginaPrincipal.buscador;
+    private By botonPais = locators.paginaPrincipal.botonPais;
+    private By modalPais = locators.paginaPrincipal.modalPais;
+    private By opcionPais = locators.paginaPrincipal.opcionPais;
+    private By botonOkPais = locators.paginaPrincipal.botonOkPais;
+    private By textoResultados = locators.paginaPrincipal.textoResultados;
+    private By cambioDireccion = locators.paginaPrincipal.cambioDireccion;
+    private By seccionResultados = locators.paginaPrincipal.seccionResultados;
+    private By precio = locators.paginaPrincipal.precio;
+    private By mensajeToaster = locators.paginaPrincipal.mensajeToaster;
 
     public paginaPrincipal() {
         super(driver);
@@ -33,20 +26,24 @@ public class paginaPrincipal extends pasosBasicos {
     public void navegar() {
         refrescarPagina();
         navigateTo("https://www.amazon.com/");
+        esperarCargaCompletaPagina();
     }
 
     public void ingresarProducto(String producto) {
         click(buscador);
         escribirTexto(buscador, producto);
+        logger.info("Se escibio ", producto, " en el buscador");
         enter(buscador);
     }
 
     public void seleccionarPais(String pais) {
         click(botonPais);
         cambiarAVentanaEmergente(modalPais);
+        esperarCargaCompletaPagina();
         espe.seleccionarOpcionListaOculta(opcionPais, pais);
         click(botonOkPais);
         cambiarAVentanaPrincipal(modalPais);
+        esperarCargaCompletaPagina();
         controlarMensajeToaster(mensajeToaster, cambioDireccion);
     }
 
@@ -56,11 +53,11 @@ public class paginaPrincipal extends pasosBasicos {
     }
 
     public boolean buscadorDisponible() {
-        return elementoVisible(buscador);
+        return elementoVisible(buscador, 5);
     }
 
     public boolean seccionResultadosDisponible() {
-        return elementoVisible(seccionResultados);
+        return elementoVisible(seccionResultados, 5);
     }
 
     public Boolean valorEsperado() {

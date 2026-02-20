@@ -1,8 +1,5 @@
 # Crear el archivo README.md usando pypandoc (formato requerido)
 
-import pypandoc
-
-readme_content = """
 # 🧪 Amazon Test Automation Framework
 
 Framework de automatización funcional para **Amazon.com**, desarrollado con **Selenium WebDriver + Cucumber (BDD)** bajo el patrón **Page Object Model (POM)** para garantizar mantenibilidad, reutilización y estabilidad.
@@ -126,16 +123,3 @@ Generados automáticamente en:
 
 Luis Miguel Abril Sanguña  
 QA Automation Engineer
-"""
-
-file_path = "/mnt/data/README.md"
-
-pypandoc.convert_text(
-    readme_content,
-    'md',
-    format='md',
-    outputfile=file_path,
-    extra_args=['--standalone']
-)
-
-file_path

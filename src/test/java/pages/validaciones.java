@@ -6,9 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
 
-import dev.failsafe.internal.util.Assert;
-import io.cucumber.java.bs.A.As;
-
 public class validaciones extends pasosBasicos {
 
     SoftAssert soft = new SoftAssert();

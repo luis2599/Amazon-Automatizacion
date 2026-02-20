@@ -27,7 +27,6 @@ public class pasosEspeciales extends pasosBasicos {
     private List<WebElement> seleccionGeneral;
     private List<WebElement> todosLosFiltros;
     private List<WebElement> categoria;
-    private List<WebElement> filtro;
 
     public pasosEspeciales() {
         super(driver);
@@ -60,7 +59,7 @@ public class pasosEspeciales extends pasosBasicos {
             WebElement select = driver.findElement(locator);
             Select dropdown = new Select(select);
             dropdown.selectByVisibleText(valor);
-            System.out.println("Valor seleccionado por texto visible: " + valor);
+            logger.info("Valor seleccionado por texto visible: " + valor);
             click(locator);
 
             // opción mas robusta para seleccionar opción, ya que en algunos casos el texto
@@ -91,7 +90,7 @@ public class pasosEspeciales extends pasosBasicos {
              * );
              */
         } catch (Exception e) {
-            System.out.println("Error seleccionando valor: " + e.getMessage());
+            logger.error("Error seleccionando valor: " + e.getMessage());
         }
     }
 
@@ -133,8 +132,7 @@ public class pasosEspeciales extends pasosBasicos {
             }
         }
 
-        System.out.println(
-                "Se han tomado todas las muestras de los resultados de búsqueda: " + todosLosResultados.size());
+        logger.info("Se han tomado todas las muestras de los resultados de búsqueda: ", todosLosResultados.size());
 
     }
 
@@ -185,7 +183,7 @@ public class pasosEspeciales extends pasosBasicos {
             }
             return true;
         } else {
-            System.out.println("No se encontraron resultados para validar");
+            logger.error("No se encontraron resultados para validar");
             return false;
         }
     }
@@ -213,7 +211,7 @@ public class pasosEspeciales extends pasosBasicos {
                 categoria.addAll(elementos);
                 break; // Salir del bucle una vez que se encuentra la categoría
             } else {
-                System.out.println("Categoria no encontrada: " + titulocategoria);
+                logger.error("Categoria no encontrada: ", titulocategoria);
             }
         }
     }
@@ -234,7 +232,7 @@ public class pasosEspeciales extends pasosBasicos {
             esperar(3);
             categoria.get(0).click();
         } else {
-            System.out.println("No se encontraron categorías para seleccionar el filtro.");
+            logger.error("No se encontraron categorías para seleccionar el filtro.");
         }
 
     }
@@ -279,10 +277,10 @@ public class pasosEspeciales extends pasosBasicos {
         try {
             WebElement tituloElement = elemento.findElement(locator);
             String texto = tituloElement.getText();
-            System.out.println("Texto obtenido: " + texto);
+            logger.info("Texto obtenido: " + texto);
             return texto;
         } catch (Exception e) {
-            System.out.println("No se pudo obtener el texto del elemento: " + locator.toString());
+            logger.error("No se pudo obtener el texto del elemento: ", locator.toString());
             return null;
         }
     }
@@ -304,10 +302,10 @@ public class pasosEspeciales extends pasosBasicos {
                     masVendidos.get(0));
             WebElement texto = masVendidos.get(0);
             String titulo = obtenerTextoWebElement(locatorTitulo, texto);
-            System.out.println("Título del producto: " + titulo);
+            logger.info("Título del producto: " + titulo);
             return titulo;
         } else {
-            System.out.println("No se encontraron resultados Mas Vendidos para obtener el dato del producto.");
+            logger.error("No se encontraron resultados Mas Vendidos para obtener el dato del producto.");
             return null;
         }
     }
@@ -316,10 +314,10 @@ public class pasosEspeciales extends pasosBasicos {
     public boolean validarPrecioProductoSeleccionado(By locator) {
         Integer precio = obtenerNumero(locator);
         if (precio != null && precio > 0) {
-            System.out.println("El precio del producto seleccionado es: " + precio);
+            logger.info("El precio del producto seleccionado es: " + precio);
             return true;
         } else {
-            System.out.println("No se pudo obtener el precio del producto seleccionado.");
+            logger.error("No se pudo obtener el precio del producto seleccionado.");
             return false;
         }
     }

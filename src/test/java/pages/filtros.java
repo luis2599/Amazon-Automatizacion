@@ -1,10 +1,6 @@
 package pages;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class filtros extends pasosBasicos {
 
@@ -14,7 +10,7 @@ public class filtros extends pasosBasicos {
         super(driver);
     }
 
-    private By contenedorFiltros = By.xpath("//div[contains(@id, 's-refinements')]");
+    By contenedorFiltros = locators.filtros.contenedorFiltros;
 
     public void tomarFiltros(String filtro, String categoria) {
         espe.seleccionFiltro(contenedorFiltros, filtro, categoria);
@@ -26,11 +22,11 @@ public class filtros extends pasosBasicos {
         esperar(2);
         // Se obtiene el atributo "aria-current" del filtro para verificar si está activo
         String estado = driver.findElement(filtroActivo).getAttribute("aria-current");
-        System.out.println("Estado del filtro '" + filtro + "': " + estado);
+        logger.info("Estado del filtro '", filtro, "': ", estado);
         if (estado.equals("true")) {
             return true;
         } else {
-            System.out.println("El filtro '" + filtro + "' no está activo.");
+            logger.error("El filtro '", filtro, "' no está activo.");
             return false;
         }
     }
